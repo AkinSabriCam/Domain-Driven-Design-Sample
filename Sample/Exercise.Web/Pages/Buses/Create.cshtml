@@ -1,0 +1,60 @@
+﻿@page
+@model Exercise.Web.Pages.Buses.CreateModel
+@{
+}
+
+    <form asp-page="/Buses/Create" method="post">
+        <div class="form-group">
+            <label>Company</label>
+            <select asp-for="Bus.CompanyId" class="form-control">
+                @foreach(var company in Model.Companies)
+                {
+                    <option value="@company.Id">@company.CompanyName</option>
+                }
+            </select>
+
+        </div>
+        <div class="form-group">
+            <label>Color</label>
+            <input asp-for="Bus.Color" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Expedition Number</label>
+            <input asp-for="Bus.ExpeditionNumber" class="form-control" />
+
+        </div>
+
+        <div class="form-group">
+            <label>Bus Km</label>
+            <input asp-for="Bus.Km" class="form-control" />
+
+        </div>
+
+        <div class="form-group">
+            <label>Mark</label>
+            <input asp-for="Bus.Mark" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Plate</label>
+            <input asp-for="Bus.Plate" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Release Date</label>
+            <input asp-for="Bus.ReleaseDate" class="form-control" />
+
+        </div>
+
+        <div class="form-group">
+            <label>Route</label>
+            <input asp-for="Bus.Route" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Seat Count</label>
+            <input asp-for="Bus.SeatCount" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn-dark">Create</button>
+    </form>

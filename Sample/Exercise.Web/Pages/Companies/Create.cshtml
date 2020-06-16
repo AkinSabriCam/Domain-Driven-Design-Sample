@@ -1,0 +1,30 @@
+﻿@page
+@model Exercise.Web.Pages.Companies.CreateModel
+@{
+}
+
+
+<form asp-page="/Companies/Create" method="post">
+    <div class="form-group">
+        <label>Company Name</label>
+        <input asp-for="Company.CompanyName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Head Quarters of The Company</label>
+        <input asp-for="Company.HeadQuarters" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Foundation Date</label>
+        <input asp-for="Company.FoundationDate" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Employers Count</label>
+        <input asp-for="Company.EmployersCount" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn-dark">Create Company</button>
+
+</form>

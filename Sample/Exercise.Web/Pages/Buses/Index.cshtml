@@ -1,0 +1,46 @@
+﻿
+@page
+@model Exercise.Web.Pages.Buses.IndexModel
+@{
+}
+
+<h1>Buses Page</h1>
+
+<form asp-page="/Buses/Create" method="get">
+    <button type="submit" class="btn-success">New Bus </button>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Bus Id</th>
+            <th>Company Id</th>
+            <th>Expedition Number</th>
+            <th>Mark</th>
+            <th>Route</th>
+            <th>Seat Count</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bus in Model.BusList)
+        {
+            <tr>
+                <td>@bus.Id</td>
+                <td>@bus.CompanyId</td>
+                <td>@bus.ExpeditionNumber</td>
+                <td>@bus.Mark</td>
+                <td>@bus.Route</td>
+                <td>@bus.SeatCount</td>
+                <td>
+                    <form asp-page="/Buses/Update" asp-route-id="@bus.Id" method="get">
+                        <button type="submit" class="btn-danger">Update</button>
+                    </form>
+                </td>
+                <td></td>
+            </tr>
+        }
+
+    </tbody>
+</table>

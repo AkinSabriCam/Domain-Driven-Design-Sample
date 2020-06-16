@@ -1,0 +1,34 @@
+﻿@page
+@model Exercise.Web.Pages.Companies.IndexModel
+@{
+}
+<h1>Company Page</h1>
+
+<form asp-page="/Companies/Create" method="get">
+    <button type="submit" class="btn-danger">New Company</button>
+</form>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Company Name</th>
+            <th>Head Quarters</th>
+            <th>Foundation Date</th>
+            <th>Employers Count</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var company in Model.Companies)
+        {
+            <tr>
+                <td>@company.Id</td>
+                <td>@company.CompanyName</td>
+                <td>@company.HeadQuarters</td>
+                <td>@company.FoundationDate.ToShortDateString()</td>
+                <td>@company.EmployersCount</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
