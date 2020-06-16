@@ -51,7 +51,6 @@ namespace Exercise.Web.Pages.Buses
 
     public class CreateBusViewModel
     {
-        [Required]
         public Guid CompanyId { get; set; }
 
         public int SeatCount { get; set; }

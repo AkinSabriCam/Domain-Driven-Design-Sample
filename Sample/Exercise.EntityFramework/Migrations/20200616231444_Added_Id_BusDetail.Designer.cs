@@ -4,14 +4,16 @@ using Exercise.EntityFramework.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Exercise.EntityFramework.Migrations
 {
     [DbContext(typeof(ExerciseDbContext))]
-    partial class ExerciseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200616231444_Added_Id_BusDetail")]
+    partial class Added_Id_BusDetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

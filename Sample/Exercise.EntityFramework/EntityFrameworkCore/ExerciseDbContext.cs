@@ -54,7 +54,7 @@ namespace Exercise.EntityFramework.EntityFrameworkCore
 
             modelBuilder.Entity<BusDetail>(b =>
             {
-                b.HasKey(x => x.BusDetailId);
+                b.HasKey(x => x.Id);
                 b.HasKey(x => x.BusId);
 
 

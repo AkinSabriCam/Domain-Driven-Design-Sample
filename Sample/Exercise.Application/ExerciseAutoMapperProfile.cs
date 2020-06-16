@@ -24,6 +24,8 @@ namespace Exercise.Application
 
             CreateMap<CreateBusDto, Bus>();
 
+            CreateMap<AddBusDto, Bus>();
+
             CreateMap<UpdateBusDto, Bus>();
 
             CreateMap<BusWithDetailsDto, UpdateBusDto>();

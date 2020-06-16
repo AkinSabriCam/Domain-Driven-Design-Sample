@@ -6,7 +6,7 @@ namespace Exercise.Domain.Buses
 {
     public class BusDetail
     {
-        public int BusDetailId { get; set; }
+        public Guid Id { get; set; }
 
         public Guid BusId { get; set; }
 
@@ -19,5 +19,10 @@ namespace Exercise.Domain.Buses
         public int Km { get; set; }
 
         public virtual Bus  Bus { get; set; }
+
+        public BusDetail()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

@@ -34,7 +34,10 @@ namespace Exercise.Domain.Buses
 
         public void AddBusDetail(BusDetail busDetail)
         {
-            this.BusDetail = busDetail;
+            if (this.BusDetail == null)
+            {
+                this.BusDetail = busDetail;
+            }
         }
 
     }

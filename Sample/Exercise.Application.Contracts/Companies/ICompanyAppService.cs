@@ -2,7 +2,6 @@
 using Exercise.Application.Contracts.Companies.Dtos;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Exercise.Application.Contracts.Companies
@@ -21,7 +20,7 @@ namespace Exercise.Application.Contracts.Companies
 
         Task<UpdateCompanyDto> UpdateAsync(UpdateCompanyDto entity);
 
-        Task<CreateBusDto> AddBusAsync(CreateBusDto entity);
+        Task<AddBusDto> AddBusAsync(AddBusDto entity, Guid companyId);
 
         Task DeleteAsync(Guid id);
 
