@@ -10,13 +10,16 @@ namespace Exercise.Application
     {
         public ExerciseAutoMapperProfile()
         {
-            CreateMap<Bus, BusDto>();
+            CreateMap<Bus, BusDto>()
+                .ForMember(x => x.CompanyName, opt => opt.MapFrom(x => x.Company.CompanyName));
 
             CreateMap<Bus, BusWithDetailsDto>()
                 .ForMember(x => x.Plate, opt => opt.MapFrom(x => x.BusDetail.Plate))
                 .ForMember(x => x.Color, opt => opt.MapFrom(x => x.BusDetail.Color))
                 .ForMember(x => x.ReleaseDate, opt => opt.MapFrom(x => x.BusDetail.ReleaseDate))
-                .ForMember(x => x.Km, opt => opt.MapFrom(x => x.BusDetail.Km));
+                .ForMember(x => x.Km, opt => opt.MapFrom(x => x.BusDetail.Km))
+                .ForMember(x => x.CompanyName, opt => opt.MapFrom(x => x.Company.CompanyName));
+                
             
 
             CreateMap<CreateBusDto, Bus>();

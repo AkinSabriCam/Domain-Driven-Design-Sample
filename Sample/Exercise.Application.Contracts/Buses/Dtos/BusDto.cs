@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Exercise.Application.Contracts.Buses.Dtos
 {
@@ -9,6 +7,8 @@ namespace Exercise.Application.Contracts.Buses.Dtos
         public Guid Id { get; set; }
 
         public Guid CompanyId { get; set; }
+
+        public string CompanyName { get; set; }
 
         public int SeatCount { get; set; }
 

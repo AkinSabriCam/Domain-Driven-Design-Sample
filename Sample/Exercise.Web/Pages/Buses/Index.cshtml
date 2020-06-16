@@ -13,8 +13,7 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Bus Id</th>
-            <th>Company Id</th>
+            <th>Company</th>
             <th>Expedition Number</th>
             <th>Mark</th>
             <th>Route</th>
@@ -27,8 +26,7 @@
         @foreach (var bus in Model.BusList)
         {
             <tr>
-                <td>@bus.Id</td>
-                <td>@bus.CompanyId</td>
+                <td>@bus.CompanyName</td>
                 <td>@bus.ExpeditionNumber</td>
                 <td>@bus.Mark</td>
                 <td>@bus.Route</td>

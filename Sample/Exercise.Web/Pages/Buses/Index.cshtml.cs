@@ -10,7 +10,7 @@ namespace Exercise.Web.Pages.Buses
     {
         private readonly IBusAppService _busAppService;
 
-        public IList<BusDto> BusList { get; set; }  
+        public IList<BusWithDetailsDto> BusList { get; set; }  
 
         public IndexModel(IBusAppService busAppService)
         {
@@ -18,7 +18,7 @@ namespace Exercise.Web.Pages.Buses
         }
         public async Task OnGet()
         {
-            BusList = await _busAppService.GetListAsync();
+            BusList = await _busAppService.GetListWithDetailsAsync();
         }
     }
 }

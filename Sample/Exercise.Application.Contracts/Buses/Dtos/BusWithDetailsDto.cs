@@ -11,6 +11,8 @@ namespace Exercise.Application.Contracts.Buses.Dtos
 
         public Guid CompanyId { get; set; }
 
+        public string CompanyName { get; set; }
+
         public int SeatCount { get; set; }
 
         public int Km { get; set; }

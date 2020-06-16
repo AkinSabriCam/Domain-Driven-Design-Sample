@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Exercise.EntityFramework.EntityFrameworkCore.Buses
@@ -15,18 +16,20 @@ namespace Exercise.EntityFramework.EntityFrameworkCore.Buses
 
         public async Task<IList<Bus>> GetBusWithDetailsAsync()
         {
-            var buses = GetQueryable();
-            buses = buses.Include(x => x.BusDetail);
-
-            return await buses.ToListAsync();
+            return await GetAllBusDetailsAsync().ToListAsync();
         }
 
         public async Task<Bus> GetWithDetailsById(Guid id)
         {
+            return await GetAllBusDetailsAsync().FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        private IQueryable<Bus> GetAllBusDetailsAsync()
+        {
             var buses = GetQueryable();
             buses = buses.Include(x => x.BusDetail);
-
-            return await buses.FirstOrDefaultAsync(x => x.Id == id);
+            buses = buses.Include(x => x.Company);
+            return buses;
         }
     }
 }
