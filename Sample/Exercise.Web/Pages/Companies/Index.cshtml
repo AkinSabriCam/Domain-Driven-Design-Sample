@@ -10,7 +10,6 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Company Name</th>
             <th>Head Quarters</th>
             <th>Foundation Date</th>
@@ -21,13 +20,18 @@
     <tbody>
         @foreach (var company in Model.Companies)
         {
-            <tr>
-                <td>@company.Id</td>
-                <td>@company.CompanyName</td>
-                <td>@company.HeadQuarters</td>
-                <td>@company.FoundationDate.ToShortDateString()</td>
-                <td>@company.EmployersCount</td>
-            </tr>
+        <tr>
+
+            <td>@company.CompanyName</td>
+            <td>@company.HeadQuarters</td>
+            <td>@company.FoundationDate.ToShortDateString()</td>
+            <td>@company.EmployersCount</td>
+            <td>
+                <form asp-page="/Companies/Update" asp-route-id="@company.Id" method="get">
+                    <button type="submit" class="btn btn-danger">Update</button>
+                </form>
+            </td>
+        </tr>
         }
     </tbody>
 

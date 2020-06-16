@@ -38,6 +38,9 @@ namespace Exercise.Application
             CreateMap<UpdateCompanyDto, Company>();
 
             CreateMap<CompanyWithDetailsDto, UpdateCompanyDto>();
+
+            CreateMap<CompanyDto, UpdateCompanyDto>();
+
         }
     }
 }
