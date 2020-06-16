@@ -11,7 +11,7 @@ namespace Exercise.Application.Contracts.Companies
     {
         Task<CompanyDto> GetAsync(Guid id);
 
-        Task<CompanyWithDetailsDto> GetWithDetails(Guid id);
+        Task<CompanyWithDetailsDto> GetWithDetailsAsync(Guid id);
 
         Task<IList<CompanyDto>> GetListAsync();
 

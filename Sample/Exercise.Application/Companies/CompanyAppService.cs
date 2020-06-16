@@ -27,7 +27,7 @@ namespace Exercise.Application.Companies
                 await _companyRepository.GetByIdAsync(id));
         }
 
-        public async Task<CompanyWithDetailsDto> GetWithDetails(Guid id)
+        public async Task<CompanyWithDetailsDto> GetWithDetailsAsync(Guid id)
         {
             return _mapper.Map<Company, CompanyWithDetailsDto>(
                 await _companyRepository.GetWithDetailsById(id));
