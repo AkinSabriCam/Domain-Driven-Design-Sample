@@ -15,23 +15,30 @@
             <th>Foundation Date</th>
             <th>Employers Count</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var company in Model.Companies)
         {
-        <tr>
+            <tr>
 
-            <td>@company.CompanyName</td>
-            <td>@company.HeadQuarters</td>
-            <td>@company.FoundationDate.ToShortDateString()</td>
-            <td>@company.EmployersCount</td>
-            <td>
-                <form asp-page="/Companies/Update" asp-route-id="@company.Id" method="get">
-                    <button type="submit" class="btn btn-danger">Update</button>
-                </form>
-            </td>
-        </tr>
+                <td>@company.CompanyName</td>
+                <td>@company.HeadQuarters</td>
+                <td>@company.FoundationDate.ToShortDateString()</td>
+                <td>@company.EmployersCount</td>
+                <td>
+                    <form asp-page="/Companies/Update" asp-route-id="@company.Id" method="get">
+                        <button type="submit" class="btn btn-warning">Update</button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-page="/Companies/AddBus" asp-route-id="@company.Id" method="get">
+                        <button type="submit" class="btn btn-secondary">Add Bus</button>
+                    </form>
+
+                </td>
+            </tr>
         }
     </tbody>
 

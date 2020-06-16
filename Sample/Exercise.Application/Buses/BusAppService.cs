@@ -59,7 +59,6 @@ namespace Exercise.Application.Buses
             });
 
             await _busRepository.CreateAsync(bus);
-
             return entity;
         }
 

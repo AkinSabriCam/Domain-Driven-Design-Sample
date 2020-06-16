@@ -13,11 +13,14 @@ namespace Exercise.Application.Companies
     public class CompanyAppService : ICompanyAppService
     {
         private readonly ICompanyRepository _companyRepository;
+        private readonly IBusRepository _busRepository;
+
         private readonly IMapper _mapper;
 
-        public CompanyAppService(ICompanyRepository companyRepository, IMapper mapper)
+        public CompanyAppService(ICompanyRepository companyRepository, IMapper mapper, IBusRepository busRepository)
         {
             _companyRepository = companyRepository;
+            _busRepository = busRepository;
             _mapper = mapper;
         }
 
@@ -45,17 +48,27 @@ namespace Exercise.Application.Companies
                 await _companyRepository.GetListWithDetails());
         }
 
-        public async Task<CreateBusDto> AddBusAsync(CreateBusDto entity)
+        public async Task<AddBusDto> AddBusAsync(AddBusDto entity, Guid companyId)
         {
-            var company = await _companyRepository.GetByIdAsync(entity.CompanyId);
-            company.AddBus(
-                _mapper.Map<CreateBusDto, Bus>(entity));
+            var company = await _companyRepository.GetByIdAsync(companyId);
+            var bus = _mapper.Map<AddBusDto, Bus>(entity);
+
+            bus.AddBusDetail(new BusDetail()
+            {
+                Color = entity.Color,
+                Km = entity.Km,
+                Plate = entity.Plate,
+                ReleaseDate = entity.ReleaseDate
+            });
+
+            await _busRepository.CreateAsync(bus);
+            
+            company.AddBus(bus);
             return entity;
         }
 
         public async Task<CreateCompanyDto> CreateAsync(CreateCompanyDto entity)
         {
-
             var company = _mapper.Map<CreateCompanyDto, Company>(entity);
             await _companyRepository.CreateAsync(company);
 
