@@ -20,11 +20,6 @@ namespace Exercise.Application.Contracts.Companies
 
         Task<UpdateCompanyDto> UpdateAsync(UpdateCompanyDto entity);
 
-        Task<AddBusDto> AddBusAsync(AddBusDto entity, Guid companyId);
-
         Task DeleteAsync(Guid id);
-
-        Task<bool> EnsureChangesAsync();
-
     }
 }

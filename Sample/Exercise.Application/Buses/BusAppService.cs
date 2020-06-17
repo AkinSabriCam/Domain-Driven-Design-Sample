@@ -2,6 +2,7 @@
 using Exercise.Application.Contracts.Buses;
 using Exercise.Application.Contracts.Buses.Dtos;
 using Exercise.Domain.Buses;
+using Exercise.EntityFramework.EntityFrameworkCore.UoW;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,11 +12,13 @@ namespace Exercise.Application.Buses
     public class BusAppService : IBusAppService
     {
         private readonly IBusRepository _busRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public BusAppService(IBusRepository busRepository, IMapper mapper)
+        public BusAppService(IBusRepository busRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _busRepository = busRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
@@ -31,7 +34,6 @@ namespace Exercise.Application.Buses
             var bus = await _busRepository.GetListAsync();
 
             return _mapper.Map<IList<Bus>, IList<BusDto>>(bus);
-
         }
 
         public async Task<IList<BusWithDetailsDto>> GetListWithDetailsAsync(GetListInput input)
@@ -49,36 +51,44 @@ namespace Exercise.Application.Buses
 
         public async Task<CreateBusDto> CreateAsync(CreateBusDto entity)
         {
-            var bus = _mapper.Map<CreateBusDto, Bus>(entity);
-            bus.AddBusDetail(new BusDetail()
+            using (_unitOfWork)
             {
-                Color = entity.Color,
-                Plate = entity.Plate,
-                Km = entity.Km,
-                ReleaseDate = entity.ReleaseDate
-            });
+                var bus = _mapper.Map<CreateBusDto, Bus>(entity);
+                bus.AddBusDetail(new BusDetail()
+                {
+                    Color = entity.Color,
+                    Plate = entity.Plate,
+                    Km = entity.Km,
+                    ReleaseDate = entity.ReleaseDate
+                });
 
-            await _busRepository.CreateAsync(bus);
+                await _busRepository.CreateAsync(bus);
+                await _unitOfWork.SaveChangesAsync();
+            }
+
             return entity;
         }
 
         public async Task<UpdateBusDto> UpdateAsync(UpdateBusDto entity)
         {
-            var bus = _mapper.Map<UpdateBusDto, Bus>(entity);
-            await _busRepository.UpdateAsync(bus);
+            using (_unitOfWork)
+            {
+                var bus = _mapper.Map<UpdateBusDto, Bus>(entity);
+            
+                await _busRepository.UpdateAsync(bus);
+                await _unitOfWork.SaveChangesAsync();
+            }
 
             return entity;
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            await _busRepository.DeleteAsync(id);
+            using (_unitOfWork)
+            {
+                await _busRepository.DeleteAsync(id);
+                await _unitOfWork.SaveChangesAsync();
+            }
         }
-
-        public async Task<bool> EnsureChangesAsync()
-        {
-            return await _busRepository.EnsureChangesAsync();
-        }
-
     }
 }

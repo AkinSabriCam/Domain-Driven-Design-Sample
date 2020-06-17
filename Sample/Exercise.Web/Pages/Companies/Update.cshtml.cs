@@ -16,13 +16,11 @@ namespace Exercise.Web.Pages.Companies
         private readonly ICompanyAppService _companyAppService;
         private readonly IMapper _mapper;
 
-
         public UpdateModel(ICompanyAppService companyAppService, IMapper mapper)
         {
             _companyAppService = companyAppService;
             _mapper = mapper;
         }
-
 
         public async Task OnGet(Guid id)
         {
@@ -34,10 +32,7 @@ namespace Exercise.Web.Pages.Companies
             await _companyAppService.UpdateAsync(
                _mapper.Map<CompanyDto, UpdateCompanyDto>(Company));
 
-            await _companyAppService.EnsureChangesAsync();
-
             return RedirectToPage("Index");
         }
     }
-
 }

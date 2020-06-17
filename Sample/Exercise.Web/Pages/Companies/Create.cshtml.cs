@@ -29,9 +29,7 @@ namespace Exercise.Web.Pages.Companies
         public async Task<IActionResult> OnPost()
         {
             var company = _mapper.Map<CreateCompanyViewModel, CreateCompanyDto>(Company);
-
             await _companyAppService.CreateAsync(company);
-            await _companyAppService.EnsureChangesAsync();
 
             return RedirectToPage("/Companies/Index");
         }

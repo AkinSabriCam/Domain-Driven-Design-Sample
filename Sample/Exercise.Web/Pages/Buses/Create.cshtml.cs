@@ -43,7 +43,6 @@ namespace Exercise.Web.Pages.Buses
         {
             var busDto = _mapper.Map<CreateBusViewModel, CreateBusDto>(Bus);
             await _busAppService.CreateAsync(busDto);
-            await _busAppService.EnsureChangesAsync();
 
             return RedirectToPage("/Buses/Index");
         }

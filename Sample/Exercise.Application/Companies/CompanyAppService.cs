@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-using Exercise.Application.Contracts.Buses.Dtos;
 using Exercise.Application.Contracts.Companies;
 using Exercise.Application.Contracts.Companies.Dtos;
-using Exercise.Domain.Buses;
 using Exercise.Domain.Companies;
+using Exercise.EntityFramework.EntityFrameworkCore.UoW;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,14 +12,13 @@ namespace Exercise.Application.Companies
     public class CompanyAppService : ICompanyAppService
     {
         private readonly ICompanyRepository _companyRepository;
-        private readonly IBusRepository _busRepository;
-
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CompanyAppService(ICompanyRepository companyRepository, IMapper mapper, IBusRepository busRepository)
+        public CompanyAppService(ICompanyRepository companyRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _companyRepository = companyRepository;
-            _busRepository = busRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
@@ -48,50 +46,40 @@ namespace Exercise.Application.Companies
                 await _companyRepository.GetListWithDetails());
         }
 
-        public async Task<AddBusDto> AddBusAsync(AddBusDto entity, Guid companyId)
-        {
-            var company = await _companyRepository.GetByIdAsync(companyId);
-            var bus = _mapper.Map<AddBusDto, Bus>(entity);
-
-            bus.AddBusDetail(new BusDetail()
-            {
-                Color = entity.Color,
-                Km = entity.Km,
-                Plate = entity.Plate,
-                ReleaseDate = entity.ReleaseDate
-            });
-
-            await _busRepository.CreateAsync(bus);
-            
-            company.AddBus(bus);
-            return entity;
-        }
-
         public async Task<CreateCompanyDto> CreateAsync(CreateCompanyDto entity)
         {
-            var company = _mapper.Map<CreateCompanyDto, Company>(entity);
-            await _companyRepository.CreateAsync(company);
+            using (_unitOfWork)
+            {
+                var company = _mapper.Map<CreateCompanyDto, Company>(entity);
+
+                await _companyRepository.CreateAsync(company);
+                await _unitOfWork.SaveChangesAsync();
+            }
 
             return entity;
         }
 
         public async Task<UpdateCompanyDto> UpdateAsync(UpdateCompanyDto entity)
         {
-            var company = _mapper.Map<UpdateCompanyDto, Company>(entity);
-            await _companyRepository.UpdateAsync(company);
+            using (_unitOfWork)
+            {
+                var company = _mapper.Map<UpdateCompanyDto, Company>(entity);
+
+                await _companyRepository.UpdateAsync(company);
+                await _unitOfWork.SaveChangesAsync();
+            }
 
             return entity;
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            await _companyRepository.DeleteAsync(id);
+            using (_unitOfWork)
+            {
+                await _companyRepository.DeleteAsync(id);
+                await _unitOfWork.SaveChangesAsync();
+            }
+                
         }
-
-        public async Task<bool> EnsureChangesAsync()
-        {
-            return await _companyRepository.EnsureChangesAsync();
-        }
-
     }
 }

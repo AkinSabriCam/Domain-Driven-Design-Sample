@@ -12,8 +12,6 @@ namespace Exercise.Web
         {
             CreateMap<CreateBusViewModel, CreateBusDto>();
 
-            CreateMap<CreateBusViewModel, AddBusDto>();
-
             CreateMap<CreateCompanyViewModel, CreateCompanyDto>();
         }
     }

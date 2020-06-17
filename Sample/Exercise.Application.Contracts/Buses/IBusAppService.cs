@@ -20,7 +20,5 @@ namespace Exercise.Application.Contracts.Buses
         Task<UpdateBusDto> UpdateAsync(UpdateBusDto entity);
 
         Task DeleteAsync(Guid id);
-
-        Task<bool> EnsureChangesAsync();
     }
 }

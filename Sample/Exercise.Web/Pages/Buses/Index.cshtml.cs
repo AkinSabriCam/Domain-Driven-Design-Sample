@@ -26,7 +26,6 @@ namespace Exercise.Web.Pages.Buses
         public async Task<IActionResult> OnPostDelete(Guid id)
         {
             await _busAppService.DeleteAsync(id);
-            await _busAppService.EnsureChangesAsync();
             
             return RedirectToPage("Index");
         }

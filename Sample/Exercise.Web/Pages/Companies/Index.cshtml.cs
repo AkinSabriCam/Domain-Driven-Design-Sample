@@ -27,7 +27,6 @@ namespace Exercise.Web.Pages.Companies
         public async Task<IActionResult> OnPostDelete(Guid id)
         {
             await _companyAppService.DeleteAsync(id);
-            await _companyAppService.EnsureChangesAsync();
 
             return RedirectToPage("Index");
         }
