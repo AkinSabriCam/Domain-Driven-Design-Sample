@@ -11,20 +11,35 @@ namespace Exercise.EntityFramework.EntityFrameworkCore.Buses
     {
         public EfBusRepository(IDbContext dbContext) : base(dbContext)
         {
-            
+
         }
 
-        public async Task<IList<Bus>> GetBusWithDetailsAsync()
+        public async Task<IList<Bus>> GetBusWithDetailsAsync(Guid? companyId, string filter = null)
         {
-            return await GetAllBusDetailsAsync().ToListAsync();
+            var entities = GetAllBusDetails();
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                entities = entities.Where(x => x.Mark.Contains(filter) ||
+                                 x.Route.Contains(filter) ||
+                                 x.ExpeditionNumber.Contains(filter));
+            }
+
+            if (companyId != null)
+            {
+                entities = entities
+                    .Where(x => x.CompanyId == companyId);
+            }
+
+            return await entities.ToListAsync();
         }
 
         public async Task<Bus> GetWithDetailsById(Guid id)
         {
-            return await GetAllBusDetailsAsync().FirstOrDefaultAsync(x => x.Id == id);
+            return await GetAllBusDetails().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        private IQueryable<Bus> GetAllBusDetailsAsync()
+        private IQueryable<Bus> GetAllBusDetails()
         {
             var buses = GetQueryable();
             buses = buses.Include(x => x.BusDetail);

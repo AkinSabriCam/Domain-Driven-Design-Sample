@@ -34,9 +34,9 @@ namespace Exercise.Application.Buses
 
         }
 
-        public async Task<IList<BusWithDetailsDto>> GetListWithDetailsAsync()
+        public async Task<IList<BusWithDetailsDto>> GetListWithDetailsAsync(GetListInput input)
         {
-            var buses = await _busRepository.GetBusWithDetailsAsync();
+            var buses = await _busRepository.GetBusWithDetailsAsync(input.CompanyId, input.Filter);
 
             return _mapper.Map<IList<Bus>, IList<BusWithDetailsDto>>(buses);
         }

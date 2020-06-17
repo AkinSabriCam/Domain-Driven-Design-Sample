@@ -2,10 +2,9 @@
 @model Exercise.Web.Pages.Companies.IndexModel
 @{
 }
-<h1>Company Page</h1>
 
 <form asp-page="/Companies/Create" method="get">
-    <button type="submit" class="btn-danger">New Company</button>
+    <button type="submit" class="btn btn-success">New Company</button>
 </form>
 <table class="table table-hover">
     <thead>
@@ -17,36 +16,41 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var company in Model.Companies)
         {
-            <tr>
-
-                <td>@company.CompanyName</td>
-                <td>@company.HeadQuarters</td>
-                <td>@company.FoundationDate.ToShortDateString()</td>
-                <td>@company.EmployersCount</td>
-                <td>
-                    <form asp-page="/Companies/Update" asp-route-id="@company.Id" method="get">
-                        <button type="submit" class="btn btn-warning">Update</button>
-                    </form>
-                </td>
-                <td>
-                    <form asp-page="/Companies/AddBus" asp-route-id="@company.Id" method="get">
-                        <button type="submit" class="btn btn-secondary">Add Bus</button>
-                    </form>
-                </td>
-                <td>
-                    <form asp-page="/Company/Index" asp-page-handler="Delete" asp-route-id="@company.Id">
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete?')"
-                                class="btn-danger">
-                            Delete
-                        </button>
-                    </form>
-                </td>
-            </tr>
+        <tr>
+            <td>@company.CompanyName</td>
+            <td>@company.HeadQuarters</td>
+            <td>@company.FoundationDate.ToShortDateString()</td>
+            <td>@company.EmployersCount</td>
+            <td>
+                <form asp-page="/Companies/Update" asp-route-id="@company.Id" method="get">
+                    <button type="submit" class="btn btn-warning">Update</button>
+                </form>
+            </td>
+            <td>
+                <form asp-page="/Companies/AddBus" asp-route-id="@company.Id" method="get">
+                    <button type="submit" class="btn btn-secondary">Add Bus</button>
+                </form>
+            </td>
+            <td>
+                <form asp-page="/Companies/CompanyBusses" asp-route-id="@company.Id" method="get">
+                    <button type="submit" class="btn btn-light">View Company Buses</button>
+                </form>
+            </td>
+            <td>
+                <form asp-page="/Company/Index" asp-page-handler="Delete" asp-route-id="@company.Id">
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete?')"
+                            class="btn btn-danger">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
         }
     </tbody>
 
