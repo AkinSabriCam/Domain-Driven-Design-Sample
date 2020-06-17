@@ -66,6 +66,6 @@ namespace Exercise.Web.Pages.Buses
 
         public string Plate { get; set; }
 
-        public DateTime ReleaseDate { get; set; }
+        public DateTime ProductionDate { get; set; }
     }
 }

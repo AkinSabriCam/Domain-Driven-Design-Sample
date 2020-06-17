@@ -59,7 +59,7 @@ namespace Exercise.Application.Buses
                     Color = entity.Color,
                     Plate = entity.Plate,
                     Km = entity.Km,
-                    ReleaseDate = entity.ReleaseDate
+                    ProductionDate = entity.ProductionDate
                 });
 
                 await _busRepository.CreateAsync(bus);
