@@ -62,6 +62,7 @@ namespace Exercise.EntityFramework.EntityFrameworkCore
 
                 b.Property(x => x.Color).IsRequired().HasMaxLength(BusDetailConsts.ColorMaxLength);
                 b.Property(x => x.Plate).IsRequired().HasMaxLength(BusDetailConsts.PlateMaxLength);
+                b.Property(x => x.ProductionDate).IsRequired();
 
                 b.HasOne(x => x.Bus)
                .WithOne(x => x.BusDetail).HasForeignKey<BusDetail>(bd => bd.BusId);

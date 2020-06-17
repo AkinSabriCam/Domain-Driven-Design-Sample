@@ -12,7 +12,15 @@ namespace Exercise.Web
         {
             CreateMap<CreateBusViewModel, CreateBusDto>();
 
+            CreateMap<BusWithDetailsDto, UpdateBusViewModel>();
+
+            CreateMap<UpdateBusViewModel, UpdateBusDto>();
+
             CreateMap<CreateCompanyViewModel, CreateCompanyDto>();
+
+            CreateMap<CompanyDto, UpdateCompanyViewModel>();
+
+            CreateMap<UpdateCompanyViewModel, UpdateCompanyDto>();
         }
     }
 }
