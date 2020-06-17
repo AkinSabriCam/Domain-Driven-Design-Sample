@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using Exercise.Application.Contracts.Buses;
 using Exercise.Application.Contracts.Buses.Dtos;
 using Exercise.Application.Contracts.Companies;
 using Exercise.Web.Pages.Buses;
@@ -17,12 +18,12 @@ namespace Exercise.Web.Pages.Companies
         [BindProperty]
         public Guid Id { get; set; }
 
-        private readonly ICompanyAppService _companyAppService;
+        private readonly IBusAppService _busAppService;
         private readonly IMapper _mapper;
 
-        public AddBusModel(ICompanyAppService companyAppService, IMapper mapper)
+        public AddBusModel(IBusAppService busAppService, IMapper mapper)
         {
-            _companyAppService = companyAppService;
+            _busAppService = busAppService;
             _mapper = mapper;
         }
 
@@ -33,10 +34,10 @@ namespace Exercise.Web.Pages.Companies
 
         public async Task<IActionResult> OnPost()
         {
-            var bus = _mapper.Map<CreateBusViewModel, AddBusDto>(Bus);
-            
-            await _companyAppService.AddBusAsync(bus,Id);
-            await _companyAppService.EnsureChangesAsync();
+            var bus = _mapper.Map<CreateBusViewModel, CreateBusDto>(Bus);
+            bus.CompanyId = Id;
+
+            await _busAppService.CreateAsync(bus);
 
             return RedirectToPage("/Companies/Index");
         }

@@ -1,0 +1,29 @@
+﻿@page "{Id?}"
+@model Exercise.Web.Pages.Companies.CompanyBussesModel
+@{
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Expedition Number</th>
+            <th>Mark</th>
+            <th>Route</th>
+            <th>Seat Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bus in Model.BusList)
+        {
+            <tr>
+                <td>@bus.CompanyName</td>
+                <td>@bus.ExpeditionNumber</td>
+                <td>@bus.Mark</td>
+                <td>@bus.Route</td>
+                <td>@bus.SeatCount</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

@@ -33,7 +33,6 @@ namespace Exercise.Web.Pages.Buses
            await _busAppService.UpdateAsync(
                 _mapper.Map<BusWithDetailsDto, UpdateBusDto>(Bus));
 
-            await _busAppService.EnsureChangesAsync();
 
             return RedirectToPage("/Buses/Index");
         }

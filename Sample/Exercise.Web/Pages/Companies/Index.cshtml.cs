@@ -1,6 +1,8 @@
 using Exercise.Application.Contracts.Companies;
 using Exercise.Application.Contracts.Companies.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,7 +10,7 @@ namespace Exercise.Web.Pages.Companies
 {
     public class IndexModel : PageModel
     {
-        public IList<CompanyDto> Companies { get; set; } 
+        public IList<CompanyDto> Companies { get; set; }
 
         private readonly ICompanyAppService _companyAppService;
 
@@ -21,6 +23,14 @@ namespace Exercise.Web.Pages.Companies
         {
             Companies = await _companyAppService.GetListAsync();
         }
+
+        public async Task<IActionResult> OnPostDelete(Guid id)
+        {
+            await _companyAppService.DeleteAsync(id);
+
+            return RedirectToPage("Index");
+        }
+
     }
 
 }

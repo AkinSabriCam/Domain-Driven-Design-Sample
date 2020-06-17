@@ -13,6 +13,7 @@ using Exercise.Domain.Companies;
 using Exercise.EntityFramework.EntityFrameworkCore;
 using Exercise.EntityFramework.EntityFrameworkCore.Buses;
 using Exercise.EntityFramework.EntityFrameworkCore.Companies;
+using Exercise.EntityFramework.EntityFrameworkCore.UoW;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,7 +33,7 @@ namespace Exercise.Web
 
         public IConfiguration Configuration { get; }
 
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
@@ -48,22 +49,22 @@ namespace Exercise.Web
             services.AddScoped<ICompanyAppService, CompanyAppService>();
 
             services.AddScoped<IDbContext, ExerciseDbContext>();
-
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new ExerciseAutoMapperProfile());
-                mc.AddProfile(new ExerciseWebAutoMapperProfile()); 
+                mc.AddProfile(new ExerciseWebAutoMapperProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
         }
 
-        
-        
-        
-        
+
+
+
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

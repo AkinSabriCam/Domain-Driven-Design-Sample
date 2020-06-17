@@ -1,6 +1,8 @@
 using Exercise.Application.Contracts.Buses;
 using Exercise.Application.Contracts.Buses.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,7 +20,14 @@ namespace Exercise.Web.Pages.Buses
         }
         public async Task OnGet()
         {
-            BusList = await _busAppService.GetListWithDetailsAsync();
+            BusList = await _busAppService.GetListWithDetailsAsync(new GetListInput());
+        }
+
+        public async Task<IActionResult> OnPostDelete(Guid id)
+        {
+            await _busAppService.DeleteAsync(id);
+            
+            return RedirectToPage("Index");
         }
     }
 }

@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Exercise.Application.Contracts\Exercise.Application.Contracts.csproj" />
     <ProjectReference Include="..\Exercise.Domain\Exercise.Domain.csproj" />
+    <ProjectReference Include="..\Exercise.EntityFramework\Exercise.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>
