@@ -1,5 +1,7 @@
 ﻿using Exercise.Domain.Buses;
 using Exercise.Domain.Companies;
+using Exercise.Domain.Shared.Buses;
+using Exercise.Domain.Shared.Companies;
 using Exercise.Domain.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Exercise.EntityFramework.EntityFrameworkCore
 {
-    public class ExerciseDbContext : IdentityDbContext<User,Role,Guid>, IDbContext
+    public class ExerciseDbContext : IdentityDbContext<User, Role, Guid>, IDbContext
     {
         public ExerciseDbContext(DbContextOptions<ExerciseDbContext> options)
             : base(options)
@@ -41,10 +43,10 @@ namespace Exercise.EntityFramework.EntityFrameworkCore
             {
                 b.HasKey(x => x.Id);
 
-                b.Property(x => x.Mark).IsRequired();
-                b.Property(x => x.Route).IsRequired();
+                b.Property(x => x.Mark).IsRequired().HasMaxLength(BusConsts.MarkMaxLength);
+                b.Property(x => x.Route).IsRequired().HasMaxLength(BusConsts.RouteMaxLength);
+                b.Property(x => x.ExpeditionNumber).IsRequired().HasMaxLength(BusConsts.ExpeditionNumberMaxLength);
                 b.Property(x => x.SeatCount).IsRequired();
-                b.Property(x => x.ExpeditionNumber).IsRequired();
 
                 b.HasOne(x => x.Company)
                 .WithMany(x => x.Busses).HasForeignKey(x => x.CompanyId)
@@ -58,24 +60,24 @@ namespace Exercise.EntityFramework.EntityFrameworkCore
                 b.HasKey(x => x.BusId);
 
 
-                b.Property(x => x.Color).IsRequired();
-                b.Property(x => x.Plate).IsRequired();
+                b.Property(x => x.Color).IsRequired().HasMaxLength(BusDetailConsts.ColorMaxLength);
+                b.Property(x => x.Plate).IsRequired().HasMaxLength(BusDetailConsts.PlateMaxLength);
 
-                 b.HasOne(x => x.Bus)
-                .WithOne(x => x.BusDetail).HasForeignKey<BusDetail>(bd => bd.BusId);
+                b.HasOne(x => x.Bus)
+               .WithOne(x => x.BusDetail).HasForeignKey<BusDetail>(bd => bd.BusId);
             });
 
             modelBuilder.Entity<Company>(b =>
             {
                 b.HasKey(x => x.Id);
-                b.Property(x => x.HeadQuarters).IsRequired();
-                b.Property(x => x.CompanyName).IsRequired();
+                b.Property(x => x.HeadQuarters).IsRequired().HasMaxLength(CompanyConsts.HeadQuartersMaxLength);
+                b.Property(x => x.CompanyName).IsRequired().HasMaxLength(CompanyConsts.CompanyNameMaxLength);
             });
 
             base.OnModelCreating(modelBuilder);
         }
 
-        
+
         public async Task<bool> EnsureChangesAsync()
         {
             if (await SaveChangesAsync() > 0)
