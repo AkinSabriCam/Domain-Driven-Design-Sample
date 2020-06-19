@@ -9,51 +9,50 @@ using System.Threading.Tasks;
 
 namespace Exercise.Application.Companies
 {
-    public class CompanyAppService : ICompanyAppService
+    public class CompanyAppService : BaseAppService, ICompanyAppService
     {
         private readonly ICompanyRepository _companyRepository;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
-        public CompanyAppService(ICompanyRepository companyRepository, IUnitOfWork unitOfWork, IMapper mapper)
+        public CompanyAppService(
+            ICompanyRepository companyRepository,
+            IUnitOfWork unitOfWork,
+            IMapper objectMapper) : base(objectMapper, unitOfWork)
         {
             _companyRepository = companyRepository;
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
         public async Task<CompanyDto> GetAsync(Guid id)
         {
-            return _mapper.Map<Company, CompanyDto>(
+            return ObjectMapper.Map<Company, CompanyDto>(
                 await _companyRepository.GetByIdAsync(id));
         }
 
         public async Task<CompanyWithDetailsDto> GetWithDetailsAsync(Guid id)
         {
-            return _mapper.Map<Company, CompanyWithDetailsDto>(
+            return ObjectMapper.Map<Company, CompanyWithDetailsDto>(
                 await _companyRepository.GetWithDetailsById(id));
         }
 
         public async Task<IList<CompanyDto>> GetListAsync()
         {
-            return _mapper.Map<IList<Company>, IList<CompanyDto>>(
+            return ObjectMapper.Map<IList<Company>, IList<CompanyDto>>(
                 await _companyRepository.GetListAsync());
         }
 
         public async Task<IList<CompanyWithDetailsDto>> GetListWithDetailsAsync()
         {
-            return _mapper.Map<IList<Company>, IList<CompanyWithDetailsDto>>(
+            return ObjectMapper.Map<IList<Company>, IList<CompanyWithDetailsDto>>(
                 await _companyRepository.GetListWithDetails());
         }
 
         public async Task<CreateCompanyDto> CreateAsync(CreateCompanyDto entity)
         {
-            using (_unitOfWork)
+            using (UnitOfWork)
             {
-                var company = _mapper.Map<CreateCompanyDto, Company>(entity);
+                var company = ObjectMapper.Map<CreateCompanyDto, Company>(entity);
 
                 await _companyRepository.CreateAsync(company);
-                await _unitOfWork.SaveChangesAsync();
+                await UnitOfWork.SaveChangesAsync();
             }
 
             return entity;
@@ -61,12 +60,12 @@ namespace Exercise.Application.Companies
 
         public async Task<UpdateCompanyDto> UpdateAsync(UpdateCompanyDto entity)
         {
-            using (_unitOfWork)
+            using (UnitOfWork)
             {
-                var company = _mapper.Map<UpdateCompanyDto, Company>(entity);
+                var company = ObjectMapper.Map<UpdateCompanyDto, Company>(entity);
 
                 await _companyRepository.UpdateAsync(company);
-                await _unitOfWork.SaveChangesAsync();
+                await UnitOfWork.SaveChangesAsync();
             }
 
             return entity;
@@ -74,12 +73,11 @@ namespace Exercise.Application.Companies
 
         public async Task DeleteAsync(Guid id)
         {
-            using (_unitOfWork)
+            using (UnitOfWork)
             {
                 await _companyRepository.DeleteAsync(id);
-                await _unitOfWork.SaveChangesAsync();
+                await UnitOfWork.SaveChangesAsync();
             }
-                
         }
     }
 }
