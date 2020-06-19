@@ -4,10 +4,8 @@ using System.Text;
 
 namespace Exercise.Domain.Buses
 {
-    public class BusDetail : IBaseEntity<Guid>
+    public class BusDetail : Entity<Guid>
     {
-        public Guid Id { get; set; }
-
         public Guid BusId { get; set; }
 
         public string Color { get; set; }
