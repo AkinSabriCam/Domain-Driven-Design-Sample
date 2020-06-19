@@ -19,9 +19,7 @@ namespace Exercise.Application
                 .ForMember(x => x.ProductionDate, opt => opt.MapFrom(x => x.BusDetail.ProductionDate))
                 .ForMember(x => x.Km, opt => opt.MapFrom(x => x.BusDetail.Km))
                 .ForMember(x => x.CompanyName, opt => opt.MapFrom(x => x.Company.CompanyName));
-                
             
-
             CreateMap<CreateBusDto, Bus>();
 
             CreateMap<AddBusDto, Bus>();
@@ -29,7 +27,6 @@ namespace Exercise.Application
             CreateMap<UpdateBusDto, Bus>();
 
             CreateMap<BusWithDetailsDto, UpdateBusDto>();
-
 
             CreateMap<Company, CompanyDto>();
 
