@@ -10,6 +10,6 @@ namespace Exercise.Domain
 
         public DateTime CreateTime { get; set; }
         
-        public DateTime DleteTime { get; set; }
+        public DateTime DeleteTime { get; set; }
     }
 }
