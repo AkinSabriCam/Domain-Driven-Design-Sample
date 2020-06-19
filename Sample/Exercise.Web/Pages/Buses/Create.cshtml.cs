@@ -1,20 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Exercise.Application.Contracts.Buses;
 using Exercise.Application.Contracts.Buses.Dtos;
 using Exercise.Application.Contracts.Companies;
 using Exercise.Application.Contracts.Companies.Dtos;
-using Exercise.Domain.Companies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Exercise.Web.Pages.Buses
 {
-    public class CreateModel : PageModel
+    public class CreateModel : BasePageModel
     {
         [BindProperty]
         public CreateBusViewModel Bus { get; set; }
@@ -23,15 +20,13 @@ namespace Exercise.Web.Pages.Buses
 
         private readonly IBusAppService _busAppService;
         private readonly ICompanyAppService _companyAppService;
-        private readonly IMapper _mapper;
 
         public CreateModel(
             IBusAppService busAppService,
             IMapper mapper,
-            ICompanyAppService companyAppService)
+            ICompanyAppService companyAppService) : base(mapper)
         {
             _busAppService = busAppService;
-            _mapper = mapper;
             _companyAppService = companyAppService;
         }
         public async Task OnGet()
@@ -41,7 +36,7 @@ namespace Exercise.Web.Pages.Buses
 
         public async Task<IActionResult> OnPost()
         {
-            var busDto = _mapper.Map<CreateBusViewModel, CreateBusDto>(Bus);
+            var busDto = ObjectMapper.Map<CreateBusViewModel, CreateBusDto>(Bus);
             await _busAppService.CreateAsync(busDto);
 
             return RedirectToPage("/Buses/Index");
