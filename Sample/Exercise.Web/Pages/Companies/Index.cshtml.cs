@@ -30,7 +30,5 @@ namespace Exercise.Web.Pages.Companies
 
             return RedirectToPage("Index");
         }
-
     }
-
 }

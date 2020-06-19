@@ -2,24 +2,21 @@ using AutoMapper;
 using Exercise.Application.Contracts.Companies;
 using Exercise.Application.Contracts.Companies.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Threading.Tasks;
 
 namespace Exercise.Web.Pages.Companies
 {
-    public class CreateModel : PageModel
+    public class CreateModel : BasePageModel
     {
         [BindProperty]
         public CreateCompanyViewModel Company { get; set; }
 
         private readonly ICompanyAppService _companyAppService;
-        private readonly IMapper _mapper;
 
-        public CreateModel(ICompanyAppService companyAppService, IMapper mapper)
+        public CreateModel(ICompanyAppService companyAppService, IMapper objectMapper) : base(objectMapper)
         {
             _companyAppService = companyAppService;
-            _mapper = mapper;
         }
 
         public void OnGet()
@@ -28,7 +25,7 @@ namespace Exercise.Web.Pages.Companies
 
         public async Task<IActionResult> OnPost()
         {
-            var company = _mapper.Map<CreateCompanyViewModel, CreateCompanyDto>(Company);
+            var company = ObjectMapper.Map<CreateCompanyViewModel, CreateCompanyDto>(Company);
             await _companyAppService.CreateAsync(company);
 
             return RedirectToPage("/Companies/Index");

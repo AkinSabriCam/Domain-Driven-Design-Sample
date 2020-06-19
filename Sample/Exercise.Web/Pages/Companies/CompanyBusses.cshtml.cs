@@ -13,7 +13,6 @@ namespace Exercise.Web.Pages.Companies
 
         public IList<BusWithDetailsDto> BusList { get; set; }
 
-
         public CompanyBussesModel(IBusAppService busAppService)
         {
             _busAppService = busAppService;
