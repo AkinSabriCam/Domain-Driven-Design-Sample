@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Exercise.Domain.Buses
 {
-    public class BusDetail
+    public class BusDetail : IBaseEntity<Guid>
     {
         public Guid Id { get; set; }
 
@@ -18,7 +18,7 @@ namespace Exercise.Domain.Buses
 
         public int Km { get; set; }
 
-        public virtual Bus  Bus { get; set; }
+        public virtual Bus Bus { get; set; }
 
         public BusDetail()
         {

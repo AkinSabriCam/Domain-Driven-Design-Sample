@@ -7,9 +7,5 @@ namespace Exercise.Domain
     public interface IBaseEntity<TId>
     {
         TId Id { get; set; }
-
-        DateTime CreateTime { get; set; }
-        
-        DateTime DleteTime { get; set; }
     }
 }
