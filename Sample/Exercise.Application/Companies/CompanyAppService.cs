@@ -24,13 +24,13 @@ namespace Exercise.Application.Companies
         public async Task<CompanyDto> GetAsync(Guid id)
         {
             return ObjectMapper.Map<Company, CompanyDto>(
-                await _companyRepository.GetByIdAsync(id));
+                await _companyRepository.GetAsync(id));
         }
 
         public async Task<CompanyWithDetailsDto> GetWithDetailsAsync(Guid id)
         {
             return ObjectMapper.Map<Company, CompanyWithDetailsDto>(
-                await _companyRepository.GetWithDetailsById(id));
+                await _companyRepository.GetWithDetailsAsync(id));
         }
 
         public async Task<IList<CompanyDto>> GetListAsync()
@@ -42,33 +42,43 @@ namespace Exercise.Application.Companies
         public async Task<IList<CompanyWithDetailsDto>> GetListWithDetailsAsync()
         {
             return ObjectMapper.Map<IList<Company>, IList<CompanyWithDetailsDto>>(
-                await _companyRepository.GetListWithDetails());
+                await _companyRepository.GetListWithDetailsAsync());
         }
 
-        public async Task<CreateCompanyDto> CreateAsync(CreateCompanyDto entity)
+        public async Task<CompanyDto> CreateAsync(CreateCompanyDto createCompanyDto)
         {
             using (UnitOfWork)
             {
-                var company = ObjectMapper.Map<CreateCompanyDto, Company>(entity);
+                var company = new Company(
+                    createCompanyDto.CompanyName, 
+                    createCompanyDto.HeadQuarters, 
+                    createCompanyDto.FoundationDate, 
+                    createCompanyDto.EmployersCount,
+                    Guid.NewGuid());
 
                 await _companyRepository.CreateAsync(company);
                 await UnitOfWork.SaveChangesAsync();
-            }
 
-            return entity;
+                return ObjectMapper.Map<Company, CompanyDto>(company);    
+            }
         }
 
-        public async Task<UpdateCompanyDto> UpdateAsync(UpdateCompanyDto entity)
+        public async Task<CompanyDto> UpdateAsync(UpdateCompanyDto updateCompanyDto)
         {
             using (UnitOfWork)
             {
-                var company = ObjectMapper.Map<UpdateCompanyDto, Company>(entity);
+                var company = await _companyRepository.GetAsync(updateCompanyDto.Id);
+
+                company.SetCompanyName(updateCompanyDto.CompanyName);
+                company.SetEmployersCount(updateCompanyDto.EmployersCount);
+                company.SetFoundationDate(updateCompanyDto.FoundationDate);
+                company.SetHeadQuarters(updateCompanyDto.HeadQuarters);
 
                 await _companyRepository.UpdateAsync(company);
                 await UnitOfWork.SaveChangesAsync();
-            }
 
-            return entity;
+                return ObjectMapper.Map<Company, CompanyDto>(company);
+            }
         }
 
         public async Task DeleteAsync(Guid id)

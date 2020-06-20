@@ -23,7 +23,7 @@ namespace Exercise.Application.Buses
 
         public async Task<BusDto> GetAsync(Guid id)
         {
-            var bus = await _busRepository.GetByIdAsync(id);
+            var bus = await _busRepository.GetAsync(id);
 
             return ObjectMapper.Map<Bus, BusDto>(bus);
         }
@@ -37,7 +37,7 @@ namespace Exercise.Application.Buses
 
         public async Task<IList<BusWithDetailsDto>> GetListWithDetailsAsync(GetListInput input)
         {
-            var buses = await _busRepository.GetBusWithDetailsAsync(input.CompanyId, input.Filter);
+            var buses = await _busRepository.GetListWithDetailsAsync(input.CompanyId, input.Filter);
 
             return ObjectMapper.Map<IList<Bus>, IList<BusWithDetailsDto>>(buses);
         }
@@ -45,40 +45,51 @@ namespace Exercise.Application.Buses
         public async Task<BusWithDetailsDto> GetWithDetailsAsync(Guid id)
         {
             return ObjectMapper.Map<Bus, BusWithDetailsDto>(
-                await _busRepository.GetWithDetailsById(id));
+                await _busRepository.GetWithDetailsAsync(id));
         }
 
-        public async Task<CreateBusDto> CreateAsync(CreateBusDto entity)
+        public async Task<BusDto> CreateAsync(CreateBusDto createBusDto)
         {
             using (UnitOfWork)
             {
-                var bus = ObjectMapper.Map<CreateBusDto, Bus>(entity);
+                var bus = new Bus(
+                    createBusDto.Mark,
+                    createBusDto.ExpeditionNumber,
+                    createBusDto.SeatCount,
+                    createBusDto.Route, Guid.NewGuid());
+
                 bus.AddBusDetail(new BusDetail()
                 {
-                    Color = entity.Color,
-                    Plate = entity.Plate,
-                    Km = entity.Km,
-                    ProductionDate = entity.ProductionDate
+                    Color = createBusDto.Color,
+                    Plate = createBusDto.Plate,
+                    Km = createBusDto.Km,
+                    ProductionDate = createBusDto.ProductionDate
                 });
 
                 await _busRepository.CreateAsync(bus);
                 await UnitOfWork.SaveChangesAsync();
+
+                return ObjectMapper.Map<Bus, BusDto>(bus);
             }
 
-            return entity;
         }
 
-        public async Task<UpdateBusDto> UpdateAsync(UpdateBusDto entity)
+        public async Task<BusDto> UpdateAsync(UpdateBusDto updateBusDto)
         {
             using (UnitOfWork)
             {
-                var bus = ObjectMapper.Map<UpdateBusDto, Bus>(entity);
+                var bus = await _busRepository.GetAsync(updateBusDto.Id);
+
+                bus.SetSeatCount(updateBusDto.SeatCount);
+                bus.SetRoute(updateBusDto.Route);
+                bus.SetMark(updateBusDto.Mark);
+                bus.SetExpeditionNumber(updateBusDto.ExpeditionNumber);
 
                 await _busRepository.UpdateAsync(bus);
                 await UnitOfWork.SaveChangesAsync();
-            }
 
-            return entity;
+                return ObjectMapper.Map<Bus, BusDto>(bus);    
+            }
         }
 
         public async Task DeleteAsync(Guid id)

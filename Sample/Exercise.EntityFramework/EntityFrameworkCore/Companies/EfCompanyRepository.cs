@@ -13,7 +13,7 @@ namespace Exercise.EntityFramework.EntityFrameworkCore.Companies
 
         }
 
-        public async Task<IList<Company>> GetListWithDetails()
+        public async Task<IList<Company>> GetListWithDetailsAsync()
         {
             var companies = GetQueryable();
             companies = companies.Include(x => x.Busses);
@@ -21,7 +21,7 @@ namespace Exercise.EntityFramework.EntityFrameworkCore.Companies
             return await companies.ToListAsync();
         }
 
-        public async Task<Company> GetWithDetailsById(Guid id)
+        public async Task<Company> GetWithDetailsAsync(Guid id)
         {
             var companies = GetQueryable();
             companies = companies.Include(x => x.Busses);

@@ -16,9 +16,9 @@ namespace Exercise.Application.Contracts.Companies
 
         Task<IList<CompanyWithDetailsDto>> GetListWithDetailsAsync();
 
-        Task<CreateCompanyDto> CreateAsync(CreateCompanyDto entity);
+        Task<CompanyDto> CreateAsync(CreateCompanyDto entity);
 
-        Task<UpdateCompanyDto> UpdateAsync(UpdateCompanyDto entity);
+        Task<CompanyDto> UpdateAsync(UpdateCompanyDto entity);
 
         Task DeleteAsync(Guid id);
     }

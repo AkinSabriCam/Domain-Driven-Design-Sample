@@ -14,7 +14,7 @@ namespace Exercise.EntityFramework.EntityFrameworkCore.Buses
 
         }
 
-        public async Task<IList<Bus>> GetBusWithDetailsAsync(Guid? companyId, string filter = null)
+        public async Task<IList<Bus>> GetListWithDetailsAsync(Guid? companyId, string filter = null)
         {
             var entities = GetAllBusDetails();
 
@@ -34,7 +34,7 @@ namespace Exercise.EntityFramework.EntityFrameworkCore.Buses
             return await entities.ToListAsync();
         }
 
-        public async Task<Bus> GetWithDetailsById(Guid id)
+        public async Task<Bus> GetWithDetailsAsync(Guid id)
         {
             return await GetAllBusDetails().FirstOrDefaultAsync(x => x.Id == id);
         }

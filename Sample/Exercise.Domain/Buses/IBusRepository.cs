@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 
 namespace Exercise.Domain.Buses
 {
-    public interface IBusRepository:IBaseRepository<Bus,Guid>
+    public interface IBusRepository : IBaseRepository<Bus, Guid>
     {
-        Task<IList<Bus>> GetBusWithDetailsAsync(Guid? companyId, string filter = null);
+        Task<Bus> GetWithDetailsAsync(Guid id);
 
-        Task<Bus> GetWithDetailsById(Guid id);
+        Task<IList<Bus>> GetListWithDetailsAsync(Guid? companyId, string filter = null);
     }
 }

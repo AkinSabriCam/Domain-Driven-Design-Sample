@@ -4,27 +4,28 @@ namespace Exercise.Domain.Buses
 {
     public class Bus : FullAggregatedEntity<Guid>
     {
-        public Guid CompanyId { get; set; }
+        public Guid CompanyId { get; private set; }
 
-        public string Mark { get; set; }
+        public string Mark { get; private set; }
 
-        public string ExpeditionNumber { get; set; }
+        public string ExpeditionNumber { get; private set; }
 
-        public int SeatCount { get; set; }
+        public int SeatCount { get; private set; }
 
-        public string Route { get; set; }
+        public string Route { get; private set; }
 
-        public virtual Companies.Company Company { get; set; }
+        public virtual Companies.Company Company { get; private set; }
 
-        public virtual BusDetail BusDetail { get; set; }
+        public virtual BusDetail BusDetail { get; private set; }
 
-        public Bus()
+        protected Bus()
         {
-            Id = Guid.NewGuid();
+
         }
 
-        public Bus(string mark, string expenditionNumber, int seatCount, string route)
+        public Bus(string mark, string expenditionNumber, int seatCount, string route, Guid? id)
         {
+            Id = id ?? Guid.NewGuid();
             CompanyId = Guid.NewGuid();
             Mark = mark;
             ExpeditionNumber = expenditionNumber;
@@ -34,9 +35,43 @@ namespace Exercise.Domain.Buses
 
         public void AddBusDetail(BusDetail busDetail)
         {
-            if (this.BusDetail == null)
+            if (BusDetail == null)
             {
-                this.BusDetail = busDetail;
+                BusDetail = busDetail;
+            }
+        }
+
+        public void SetMark(string mark)
+        {
+            if (!string.IsNullOrEmpty(mark))
+            {
+                Mark = mark;
+            }
+        }
+
+        public void SetExpeditionNumber(string expeditionNumber)
+        {
+            //If you have bussiness logic to do , you can apply this these rules in entity classes
+
+            if (!string.IsNullOrEmpty(expeditionNumber))
+            {
+                ExpeditionNumber = expeditionNumber;
+            }
+        }
+
+        public void SetSeatCount(int seatCount)
+        {
+            if (seatCount >= 0)
+            {
+                SeatCount = seatCount;
+            }
+        }
+
+        public void SetRoute(string route)
+        {
+            if (!string.IsNullOrEmpty(route))
+            {
+                Route = route;
             }
         }
 

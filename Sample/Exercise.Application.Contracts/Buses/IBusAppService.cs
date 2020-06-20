@@ -15,9 +15,9 @@ namespace Exercise.Application.Contracts.Buses
 
         Task<IList<BusWithDetailsDto>> GetListWithDetailsAsync(GetListInput input);
 
-        Task<CreateBusDto> CreateAsync(CreateBusDto entity);
+        Task<BusDto> CreateAsync(CreateBusDto createBusDto);
 
-        Task<UpdateBusDto> UpdateAsync(UpdateBusDto entity);
+        Task<BusDto> UpdateAsync(UpdateBusDto updateBusDto);
 
         Task DeleteAsync(Guid id);
     }

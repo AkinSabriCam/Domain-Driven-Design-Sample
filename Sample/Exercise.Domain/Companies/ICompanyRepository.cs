@@ -7,9 +7,8 @@ namespace Exercise.Domain.Companies
 {
     public interface ICompanyRepository : IBaseRepository<Company, Guid>
     {
-        Task<IList<Company>> GetListWithDetails();
+        Task<Company> GetWithDetailsAsync(Guid id);
 
-        Task<Company> GetWithDetailsById(Guid id);
-
+        Task<IList<Company>> GetListWithDetailsAsync();
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Exercise.EntityFramework.EntityFrameworkCore
 {
     public class BaseRepository<TEntity, TId> : IBaseRepository<TEntity, TId>
-                            where TEntity : class, IBaseEntity<TId>, new()
+                            where TEntity : class, IBaseEntity<TId>
                             where TId : IEquatable<TId>
     {
 
@@ -34,7 +34,7 @@ namespace Exercise.EntityFramework.EntityFrameworkCore
             _dbTable.Remove(entity);
         }
 
-        public async Task<TEntity> GetByIdAsync(TId id)
+        public async Task<TEntity> GetAsync(TId id)
         {
             return await _dbTable.FindAsync(id);
         }

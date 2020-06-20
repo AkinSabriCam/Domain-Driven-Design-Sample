@@ -7,7 +7,7 @@ namespace Exercise.Domain
 {
     public interface IBaseRepository<TEntity, TId> where TEntity : IBaseEntity<TId> where TId :IEquatable<TId>
     {
-        Task<TEntity> GetByIdAsync(TId id);
+        Task<TEntity> GetAsync(TId id);
 
         Task<IList<TEntity>> GetListAsync();
 
