@@ -15,7 +15,7 @@
 - **Infrastructure Layer**
 - **Presentation Layer**
 
-![layersView](D:\Github\Domain-Driven-Design-Sample\images\layersView.PNG)
+![layersView](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/layersView.PNG)
 
 * **Domain Layer**  :   This layer is where our entities, repositories and  something else like this are located.
 
@@ -56,9 +56,9 @@
 
   A sample of application service and application service interface
 
-  ​                               ![IBusAppService](D:\Github\Domain-Driven-Design-Sample\images\IBusAppService.PNG)
+  ​                               ![IBusAppService](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/IBusAppService.PNG)
 
-  ![BusAppService](D:\Github\Domain-Driven-Design-Sample\images\BusAppService.PNG)
+  ![BusAppService](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/BusAppService.PNG)
 
   
 
@@ -70,7 +70,7 @@
 
     We create the BusDetail entity in AddBusDetail method in Bus class  not with the repository.  **See the example**  
 
-    ![BusBusDetailAggregate](D:\Github\Domain-Driven-Design-Sample\images\BusBusDetailAggregate.PNG)
+    ![BusBusDetailAggregate](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/BusBusDetailAggregate.PNG)
 
     * **Domain Service** : Domain service is different from application service. when we want to work multiple entities at same time we choose using the domain services. Application services contact using dto classes but domain services use entity classes. Domain services has own domain logic. It's methods do not response to client action directly.  
 
@@ -80,37 +80,16 @@
 
   * First of all you need to create database to run the project like below example. Set default project as Web project and then set default project  EntityFramework project in pm terminal and run  **update-database** command in pm console  finally.
 
-    ![migrationView](D:\Github\Domain-Driven-Design-Sample\images\migrationView.PNG)
+    ![migrationView](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/migrationView.PNG)
 
   
 
   - After this transaction you can run the project and basically test crud transactions and check source code.  
 
-  ![companies](D:\Github\Domain-Driven-Design-Sample\images\companies.PNG)
+  ![companies](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/companies.PNG)
 
-  ![buses](D:\Github\Domain-Driven-Design-Sample\images\buses.PNG)
-
-  
+  ![buses](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/buses.PNG)
 
   
-
   I tried to explain domain driven design principles and approach with this project, I hope I could help you. If you have any idea or any question about this project you can create an issue or you can contact me. Thank you for your interest.
-
-  
-
-  
-
-  ​                       
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
