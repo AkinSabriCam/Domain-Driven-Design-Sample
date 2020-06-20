@@ -63,31 +63,45 @@
   
 
   ## Some Terms About DDD 
- 
+
  * **AggregateRoot Class**  :   There maybe classes and their subclasses in your project. There are classic example that is like Order and OrderLine  classes. They are related to each other  classes so you can not create OrderLine entity without Order entity. OrderLine class depends on Order class in that point we say aggregate root class to Order class and say sub class to OrderLine class.
 
     I tried to explain this subject with an example in this project, We have Bus and BusDetail classes in the project, Bus class is aggregate root class and BusDetail class is subclass that's why we need to implement these classes in a way will be related to each other during create or other crud transaction.
 
     We create the BusDetail entity in AddBusDetail method in Bus class  not with the repository.  **See the example**  
 
-    ![BusBusDetailAggregate](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/BusBusDetailAggregate.PNG)
+    ![BusBusDetailAggregate](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/BusClass.PNG)
+
+    ![BusBusDetailAggregate](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/BusDetail.PNG)
 
   * **Domain Service** : Domain service is different from application service. when we want to work multiple entities at same time we choose using the domain services. Application services contact using dto classes but domain services use entity classes. Domain services has own domain logic. It's methods do not response to client action directly.  
 
-  
+## Implementing Domain Business Logic with Solid Principles
+
+- When we implement domain driven design in our project, we need to determine business logic clearly. There are 2 type business in this approach, one of them is domain logic and other is application logic. We implement transactions about domain logic in domain layer so I mean in entity or domain service and we implement transactions about application logic in application service. I wanted to show an example with solid like in the images. 
+
+  - We have AddBusDetail method in Bus entity because Bus is aggregated root class and bus detail its subclass.
+
+  - We have methods like **SetMark** in Entity. These methods help us to set our properties safety and If have a business logic about these properties, we can apply this logic easily with these methods. 
+
+    ![migrationView](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/BusDetailBusinessLogic.PNG)
+
+    ![migrationView](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/BusCreate.PNG)
+
+    ![migrationView](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/BusUpdate.PNG)
 
   ## Running the Project 
-  * First of all you need to create database to run the project like below example. Set default project as Web project and then set default project  EntityFramework project in pm terminal and run  **update-database** command in pm console  finally.
+* First of all you need to create database to run the project like below example. Set default project as Web project and then set default project  EntityFramework project in pm terminal and run  **update-database** command in pm console  finally.
 
-    ![migrationView](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/migrationView.PNG)
+​     ![migrationView](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/migrationView.PNG)
 
-  
+
   * After this transaction you can run the project and basically test crud transactions and check source code.  
 
   ![companies](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/companies.PNG)
 
   ![buses](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/buses.PNG)
 
-  
-  I tried to explain domain driven design principles and approach with this project, I hope I was able to  help. If you have any idea or any question about this project you can create an issue or you can contact me. Thank you for your interest.
+
+  I tried to explain domain driven design principles and approach with this project, I hope I was able to  help. If you have any idea or any question about this  project you can create an issue or you can contact me. Thank you for your interest.
 

@@ -51,8 +51,7 @@ namespace Exercise.Domain.Buses
 
         public void SetExpeditionNumber(string expeditionNumber)
         {
-            //If you have bussiness logic to do , you can apply this these rules in entity classes
-
+            // you can add more bussines logic in these set methods and you can throw exception in these methods.
             if (!string.IsNullOrEmpty(expeditionNumber))
             {
                 ExpeditionNumber = expeditionNumber;
