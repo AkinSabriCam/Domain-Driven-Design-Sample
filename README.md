@@ -11,11 +11,11 @@
 ## Layers in DDD 
 
 - **Domain Layer**
-- **Application Layer **
+- **Application Layer**
 - **Infrastructure Layer**
 - **Presentation Layer**
 
-![layersView](C:\Users\Volosoft\Desktop\DDD-Github\layersView.PNG)
+![layersView](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/layersView.PNG)
 
 * **Domain Layer**  :   This layer is where our entities, repositories and  something else like this are located.
 
@@ -56,61 +56,38 @@
 
   A sample of application service and application service interface
 
-  ​                               ![IBusAppService](C:\Users\Volosoft\Desktop\DDD-Github\IBusAppService.PNG)
+  ​                               ![IBusAppService](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/IBusAppService.PNG)
 
-  ![BusAppService](C:\Users\Volosoft\Desktop\DDD-Github\BusAppService.PNG)
+  ![BusAppService](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/BusAppService.PNG)
 
   
 
   ## Some Terms About DDD 
-
-  * **AggregateRoot Class**  :   There maybe classes and their subclasses in your project. There are classic example that is like Order and OrderLine  classes. They are related to each other  classes so you can not create OrderLine entity without Order entity. OrderLine class depends on Order class in that point we say aggregate root class to Order class and say sub class to OrderLine class.
+ 
+ * **AggregateRoot Class**  :   There maybe classes and their subclasses in your project. There are classic example that is like Order and OrderLine  classes. They are related to each other  classes so you can not create OrderLine entity without Order entity. OrderLine class depends on Order class in that point we say aggregate root class to Order class and say sub class to OrderLine class.
 
     I tried to explain this subject with an example in this project, We have Bus and BusDetail classes in the project, Bus class is aggregate root class and BusDetail class is subclass that's why we need to implement these classes in a way will be related to each other during create or other crud transaction.
 
     We create the BusDetail entity in AddBusDetail method in Bus class  not with the repository.  **See the example**  
 
-    ![BusBusDetailAggregate](C:\Users\Volosoft\Desktop\DDD-Github\BusBusDetailAggregate.PNG)
+    ![BusBusDetailAggregate](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/BusBusDetailAggregate.PNG)
 
-    * **Domain Service** : Domain service is different from application service. when we want to work multiple entities at same time we choose using the domain services. Application services contact using dto classes but domain services use entity classes. Domain services has own domain logic. It's methods do not response to client action directly.  
+  * **Domain Service** : Domain service is different from application service. when we want to work multiple entities at same time we choose using the domain services. Application services contact using dto classes but domain services use entity classes. Domain services has own domain logic. It's methods do not response to client action directly.  
 
   
 
   ## Running the Project 
-
   * First of all you need to create database to run the project like below example. Set default project as Web project and then set default project  EntityFramework project in pm terminal and run  **update-database** command in pm console  finally.
 
-    ![migrationView](C:\Users\Volosoft\Desktop\DDD-Github\migrationView.PNG)
+    ![migrationView](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/migrationView.PNG)
 
   
+  * After this transaction you can run the project and basically test crud transactions and check source code.  
 
-  - After this transaction you can run the project and basically test crud transactions and check source code.  
+  ![companies](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/companies.PNG)
 
-  ![companies](C:\Users\Volosoft\Desktop\DDD-Github\companies.PNG)
-
-  ![buses](C:\Users\Volosoft\Desktop\DDD-Github\buses.PNG)
-
-  
+  ![buses](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/buses.PNG)
 
   
-
-  I tried to explain domain driven design principles and approach with this project, I hope I could help you. If you have any idea or any question about this project you can create an issue or you can contact me. Thank you for your interest.
-
-  
-
-  
-
-  ​                       
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
+  I tried to explain domain driven design principles and approach with this project, I hope I was able to  help. If you have any idea or any question about this project you can create an issue or you can contact me. Thank you for your interest.
 
