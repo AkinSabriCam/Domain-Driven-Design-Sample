@@ -15,7 +15,7 @@
 - **Infrastructure Layer**
 - **Presentation Layer**
 
-![layersView](C:\Users\Volosoft\Desktop\DDD-Github\layersView.PNG)
+![layersView](D:\Github\Domain-Driven-Design-Sample\images\layersView.PNG)
 
 * **Domain Layer**  :   This layer is where our entities, repositories and  something else like this are located.
 
@@ -56,9 +56,9 @@
 
   A sample of application service and application service interface
 
-  ​                               ![IBusAppService](C:\Users\Volosoft\Desktop\DDD-Github\IBusAppService.PNG)
+  ​                               ![IBusAppService](D:\Github\Domain-Driven-Design-Sample\images\IBusAppService.PNG)
 
-  ![BusAppService](C:\Users\Volosoft\Desktop\DDD-Github\BusAppService.PNG)
+  ![BusAppService](D:\Github\Domain-Driven-Design-Sample\images\BusAppService.PNG)
 
   
 
@@ -70,7 +70,7 @@
 
     We create the BusDetail entity in AddBusDetail method in Bus class  not with the repository.  **See the example**  
 
-    ![BusBusDetailAggregate](C:\Users\Volosoft\Desktop\DDD-Github\BusBusDetailAggregate.PNG)
+    ![BusBusDetailAggregate](D:\Github\Domain-Driven-Design-Sample\images\BusBusDetailAggregate.PNG)
 
     * **Domain Service** : Domain service is different from application service. when we want to work multiple entities at same time we choose using the domain services. Application services contact using dto classes but domain services use entity classes. Domain services has own domain logic. It's methods do not response to client action directly.  
 
@@ -80,15 +80,15 @@
 
   * First of all you need to create database to run the project like below example. Set default project as Web project and then set default project  EntityFramework project in pm terminal and run  **update-database** command in pm console  finally.
 
-    ![migrationView](C:\Users\Volosoft\Desktop\DDD-Github\migrationView.PNG)
+    ![migrationView](D:\Github\Domain-Driven-Design-Sample\images\migrationView.PNG)
 
   
 
   - After this transaction you can run the project and basically test crud transactions and check source code.  
 
-  ![companies](C:\Users\Volosoft\Desktop\DDD-Github\companies.PNG)
+  ![companies](D:\Github\Domain-Driven-Design-Sample\images\companies.PNG)
 
-  ![buses](C:\Users\Volosoft\Desktop\DDD-Github\buses.PNG)
+  ![buses](D:\Github\Domain-Driven-Design-Sample\images\buses.PNG)
 
   
 
