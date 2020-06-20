@@ -63,7 +63,7 @@
   
 
   ## Some Terms About DDD 
-* **AggregateRoot Class**  :   There maybe classes and their subclasses in your project. There are classic example that is like Order and OrderLine  classes. They are related to each other  classes so you can not create OrderLine entity without Order entity. OrderLine class depends on Order class in that point we say aggregate root class to Order class and say sub class to OrderLine class.
+    * **AggregateRoot Class**  :   There maybe classes and their subclasses in your project. There are classic example that is like Order and OrderLine  classes. They are related to each other  classes so you can not create OrderLine entity without Order entity. OrderLine class depends on Order class in that point we say aggregate root class to Order class and say sub class to OrderLine class.
 
     I tried to explain this subject with an example in this project, We have Bus and BusDetail classes in the project, Bus class is aggregate root class and BusDetail class is subclass that's why we need to implement these classes in a way will be related to each other during create or other crud transaction.
 
@@ -71,19 +71,19 @@
 
     ![BusBusDetailAggregate](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/BusBusDetailAggregate.PNG)
 
-* **Domain Service** : Domain service is different from application service. when we want to work multiple entities at same time we choose using the domain services. Application services contact using dto classes but domain services use entity classes. Domain services has own domain logic. It's methods do not response to client action directly.  
+    * **Domain Service** : Domain service is different from application service. when we want to work multiple entities at same time we choose using the domain services. Application services contact using dto classes but domain services use entity classes. Domain services has own domain logic. It's methods do not response to client action directly.  
 
   
 
   ## Running the Project 
 
-* First of all you need to create database to run the project like below example. Set default project as Web project and then set default project  EntityFramework project in pm terminal and run  **update-database** command in pm console  finally.
+    * First of all you need to create database to run the project like below example. Set default project as Web project and then set default project  EntityFramework project in pm terminal and run  **update-database** command in pm console  finally.
 
     ![migrationView](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/migrationView.PNG)
 
   
 
-* After this transaction you can run the project and basically test crud transactions and check source code.  
+    * After this transaction you can run the project and basically test crud transactions and check source code.  
 
   ![companies](https://github.com/AkinSabriCam/Domain-Driven-Design-Sample/blob/master/images/companies.PNG)
 
