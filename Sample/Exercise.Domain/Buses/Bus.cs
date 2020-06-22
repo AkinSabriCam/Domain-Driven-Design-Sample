@@ -23,10 +23,10 @@ namespace Exercise.Domain.Buses
 
         }
 
-        public Bus(string mark, string expenditionNumber, int seatCount, string route, Guid? id)
+        public Bus(string mark, string expenditionNumber, int seatCount, string route,Guid companyId, Guid? id)
         {
             Id = id ?? Guid.NewGuid();
-            CompanyId = Guid.NewGuid();
+            CompanyId = companyId;
             Mark = mark;
             ExpeditionNumber = expenditionNumber;
             SeatCount = seatCount;
