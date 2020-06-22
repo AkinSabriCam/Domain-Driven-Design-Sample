@@ -56,7 +56,8 @@ namespace Exercise.Application.Buses
                     createBusDto.Mark,
                     createBusDto.ExpeditionNumber,
                     createBusDto.SeatCount,
-                    createBusDto.Route, Guid.NewGuid());
+                    createBusDto.Route,
+                    createBusDto.CompanyId,Guid.NewGuid());
 
                 bus.AddBusDetail(new BusDetail()
                 {
